@@ -62,9 +62,9 @@ app.post('/login', async (req, res) => {
             res.status(400).json({ message: 'Incorrect email or password, please try again' });
         }
 
-        const user = { name: userData.name };
-        const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
-        res.json({ accessToken: accessToken });
+        const userEmail = { name: userData.email };
+        const accessToken = jwt.sign(userEmail, process.env.ACCESS_TOKEN_SECRET);
+        return res.json({ accessToken: accessToken });
 
     } catch (err) {
         console.log(err);
