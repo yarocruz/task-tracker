@@ -1,6 +1,13 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { createRoot } from "react-dom/client";
+import {
+    createBrowserRouter,
+    RouterProvider,
+    Route,
+    Router,
+    Link,
+} from "react-router-dom";
 import jwtDecode from 'jwt-decode';
 
 function PrivateRoute({ children, ...rest }) {
@@ -13,7 +20,7 @@ function PrivateRoute({ children, ...rest }) {
                 token ? (
                     children
                 ) : (
-                    <Redirect
+                    <Route
                         to={{
                             pathname: '/login',
                             state: { from: location },
@@ -90,23 +97,21 @@ function App() {
     }, []);
 
     return (
-        <Router>
-            <Switch>
-                <Route path="/login">
-                    <Login />
-                </Route>
-                <PrivateRoute path="/tasks">
-                    <div>
-                        <h1>Tasks</h1>
-                        <ul>
-                            {tasks.map(task => (
-                                <li key={task.id}>{task.title}</li>
-                            ))}
-                        </ul>
-                    </div>
-                </PrivateRoute>
-            </Switch>
-        </Router>
+        <div>
+            <Route path="/login">
+                <Login />
+            </Route>
+            <PrivateRoute path="/tasks">
+                <div>
+                    <h1>Tasks</h1>
+                    <ul>
+                        {tasks.map(task => (
+                            <li key={task.id}>{task.title}</li>
+                        ))}
+                    </ul>
+                </div>
+            </PrivateRoute>
+        </div>
     );
 }
 
