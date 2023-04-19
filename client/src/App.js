@@ -2,11 +2,8 @@ import './App.css';
 import React, { useEffect, useState } from 'react';
 import { createRoot } from "react-dom/client";
 import {
-    createBrowserRouter,
-    RouterProvider,
     Route,
     Router,
-    Link,
 } from "react-router-dom";
 import jwtDecode from 'jwt-decode';
 
@@ -97,7 +94,7 @@ function App() {
     }, []);
 
     return (
-        <div>
+        <Router location={} navigator={}>
             <Route path="/login">
                 <Login />
             </Route>
@@ -111,7 +108,7 @@ function App() {
                     </ul>
                 </div>
             </PrivateRoute>
-        </div>
+        </Router>
     );
 }
 
