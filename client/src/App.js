@@ -34,7 +34,7 @@ function Login() {
         const user = { email, password };
 
         // Send login request to server
-        const response = await fetch('https://neon-marzipan-917d6a.netlify.app/login', {
+        const response = await fetch('http://localhost:8080/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ function App() {
     const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
-        fetch('https://neon-marzipan-917d6a.netlify.app/tasks', {
+        fetch('http://localhost:8080/tasks', {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
