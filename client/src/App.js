@@ -94,7 +94,7 @@ function App() {
     }, []);
 
     return (
-        <Router location={} navigator={}>
+        <Router location='null' navigator='null' >
             <Route path="/login">
                 <Login />
             </Route>
