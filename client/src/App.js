@@ -27,7 +27,6 @@ function Login() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'cors': 'no-cors'
             },
             body: JSON.stringify(user),
         });
@@ -72,7 +71,6 @@ function App() {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                'cors': 'no-cors'
             }
         })
             .then(response => response.json())
