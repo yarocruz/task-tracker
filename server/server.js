@@ -29,7 +29,11 @@ const data = {
 
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(cors()); // allow all origins
+app.use(cors({
+    origin: ["https://neon-marzipan-917d6a.netlify.app"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+})); // allow all origins
 
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
