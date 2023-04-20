@@ -1,6 +1,5 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
-import { createRoot } from "react-dom/client";
 import {
     Route, Routes, Navigate
 } from "react-router-dom";
@@ -38,7 +37,6 @@ function Login() {
         if (response.ok) {
             // Decode token
             const token = data.accessToken;
-            const decodedToken = jwtDecode(token);
             localStorage.setItem('token', token);
             window.location = '/tasks';
         } else {
