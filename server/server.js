@@ -29,7 +29,7 @@ const data = {
 
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(cors());
+//app.use(cors());
 
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
