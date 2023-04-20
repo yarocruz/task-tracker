@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import {
-    Route, Routes, Navigate
+    Route, Routes, Navigate, Link
 } from "react-router-dom";
 
 // create a private route component
@@ -78,6 +78,12 @@ function App() {
     }, []);
 
     return (
+        <>
+        <nav>
+            <Link to="/login">Login</Link>
+            <Link to="/tasks">Tasks</Link>
+        </nav>
+
         <Routes>
             <Route
                 path="login"
@@ -97,6 +103,7 @@ function App() {
                 }
             />
         </Routes>
+        </>
     );
 }
 
