@@ -2,32 +2,19 @@ import './App.css';
 import React, { useEffect, useState } from 'react';
 import { createRoot } from "react-dom/client";
 import {
-    Route,
-    Router,
+    Route, Routes, Navigate
 } from "react-router-dom";
 import jwtDecode from 'jwt-decode';
 
-function PrivateRoute({ children, ...rest }) {
-    const token = localStorage.getItem('token');
+// create a private route component
+// https://reactrouter.com/web/example/auth-workflow
+const ProtectedRoute = ({ user, children }) => {
+    if (!user) {
+        return <Navigate to="/login" replace />;
+    }
+    return children;
+};
 
-    return (
-        <Route
-            {...rest}
-            render={({ location }) =>
-                token ? (
-                    children
-                ) : (
-                    <Route
-                        to={{
-                            pathname: '/login',
-                            state: { from: location },
-                        }}
-                    />
-                )
-            }
-        />
-    );
-}
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -38,7 +25,7 @@ function Login() {
         const user = { email, password };
 
         // Send login request to server
-        const response = await fetch('https://immense-citadel-53026.herokuapp.com/login', {
+        const response = await fetch('http://localhost:8080/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -83,7 +70,7 @@ function App() {
     const [tasks, setTasks] = useState([]);
 
     useEffect(() => {
-        fetch('https://immense-citadel-53026.herokuapp.com//tasks', {
+        fetch('http://localhost:8080/tasks', {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -94,21 +81,25 @@ function App() {
     }, []);
 
     return (
-        <Router location='null' navigator='null' >
-            <Route path="/login">
-                <Login />
-            </Route>
-            <PrivateRoute path="/tasks">
-                <div>
-                    <h1>Tasks</h1>
-                    <ul>
-                        {tasks.map(task => (
-                            <li key={task.id}>{task.title}</li>
-                        ))}
-                    </ul>
-                </div>
-            </PrivateRoute>
-        </Router>
+        <Routes>
+            <Route
+                path="login"
+                element={<Login />}
+            />
+            <Route
+                path="tasks"
+                element={
+                    <ProtectedRoute user={tasks}>
+                        <h1>Tasks</h1>
+                        <ul>
+                            {tasks.map(task => (
+                                <li key={task.id}>{task.title}</li>
+                            ))}
+                        </ul>
+                    </ProtectedRoute>
+                }
+            />
+        </Routes>
     );
 }
 
