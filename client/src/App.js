@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import {
     Route, Routes, Navigate
 } from "react-router-dom";
-import jwtDecode from 'jwt-decode';
 
 // create a private route component
 // https://reactrouter.com/web/example/auth-workflow
