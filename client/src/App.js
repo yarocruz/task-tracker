@@ -69,7 +69,6 @@ function App() {
     useEffect(() => {
         fetch('https://immense-citadel-53026.herokuapp.com/tasks', {
             headers: {
-                'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('token'),
             }
         })
