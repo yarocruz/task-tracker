@@ -25,10 +25,6 @@ function Login() {
         // Send login request to server
         const response = await fetch('https://immense-citadel-53026.herokuapp.com/login', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'mode': 'cors',
-            },
             body: JSON.stringify(user),
         });
 
@@ -71,7 +67,6 @@ function App() {
         fetch('https://immense-citadel-53026.herokuapp.com/tasks', {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                'mode': 'cors',
             }
         })
             .then(response => response.json())
