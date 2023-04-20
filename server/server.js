@@ -29,16 +29,22 @@ const data = {
 
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(cors()); // allow all origins
+app.use(cors(
+    {
+        origin:'*',
+        credentials:true,            //access-control-allow-credentials:true
+        optionSuccessStatus:200,
+    }
+)); // allow all origins
 
 // Middleware to set CORS headers
-app.use((req, res, next) => {
-    // Replace 'https://neon-marzipan-917d6a.netlify.app' with the domain of your client application
-    res.setHeader('Access-Control-Allow-Origin', 'https://neon-marzipan-917d6a.netlify.app');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    next();
-});
+// app.use((req, res, next) => {
+//     // Replace 'https://neon-marzipan-917d6a.netlify.app' with the domain of your client application
+//     res.setHeader('Access-Control-Allow-Origin', 'https://neon-marzipan-917d6a.netlify.app');
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//     next();
+// });
 
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
