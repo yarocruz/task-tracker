@@ -27,7 +27,7 @@ function Login() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'cors': 'no-cors',
+                'mode': 'cors',
             },
             body: JSON.stringify(user),
         });
@@ -71,7 +71,7 @@ function App() {
         fetch('https://immense-citadel-53026.herokuapp.com/tasks', {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem('token'),
-                'cors': 'no-cors',
+                'mode': 'cors',
             }
         })
             .then(response => response.json())
